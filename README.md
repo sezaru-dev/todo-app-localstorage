@@ -1,34 +1,141 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Todo app solution
 
-## Getting Started
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+
+- [Author](#author)
+
+
+
+## Overview
+
+### The challenge
+
+Users should be able to:
+
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- **Bonus**: Drag and drop to reorder items on the list
+
+### Screenshot
+1. Mobile view dark mode
+![](./screenshots/todo-phone-darkmode.png)
+
+2. Mobile view light mode
+![](./screenshots/todo-phone-lightmode.png)
+
+3. Desktop view dark mode
+![](./screenshots/todo-desktop-darkmode.png)
+
+4. Desktop view light mode
+![](./screenshots/todo-desktop-lightmode.png)
+
+### Links
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
+## My process
+
+### Built with
+
+- HTML5
+- CSS
+- Mobile-first workflow
+- next-themes
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
+- [TailwindCSS](https://tailwindcss.com/) - CSS Framework
+
+
+### What I learned
+
+
+1. Saving data into local storage
+```js
+localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks))
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. getting data from local storage
+```js
+localStorage.getItem(LOCAL_STORAGE_KEY)
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+3. Using tailwind and next-themes to change themes from darkmode-lightmode vice-versa.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- tailwind.config.js
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	darkMode: 'class',
+	content: [],
+	theme: {
+		extend: {},
+	},
+	plugins: [],
+};
+```
 
-## Learn More
+- index.jsx
 
-To learn more about Next.js, take a look at the following resources:
+```js
+  import { useTheme } from "next-themes"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  export default function Home() {
+    const { systemTheme, theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    useEffect(() => {
+      setMounted(true);
+    }, []);
 
-## Deploy on Vercel
+    if (!mounted) return null;
+    const currentTheme = theme === 'system' ? systemTheme : theme;
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    return (
+      <h1>Index Page</h1>
+    )
+  }
+```
+- toggle dark mode to light mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```js
+  {currentTheme === 'dark' ? (
+    <button className=" h-7 w-7" onClick={() => setTheme('light')}>
+      <Image src={sunIcon} alt="sun.svg" />
+    </button>
+  ) : (
+    <button className=" h-7 w-7" onClick={() => setTheme('dark')}>
+      <Image src={moonIcon} alt="moon.svg" />
+    </button>
+  )}
+```
+
+
+### Continued development
+
+I tried to use react-beautiful-dnd for drag&Drop functionality and it was a success, but i've decided not to implement drag&drop because I ended up deleting some task when I reorder list on active and completed tabs.
+
+
+## Author
+
+Frontend Mentor - [sezaru-dev](https://www.frontendmentor.io/profile/sezaru-dev)
+
+
