@@ -48,8 +48,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/sezaru-dev/todo-app-localstorage](https://github.com/sezaru-dev/todo-app-localstorage)
+- Live Site URL: [https://todo-app-cb.vercel.app/](https://todo-app-cb.vercel.app/)
 
 ## My process
 
